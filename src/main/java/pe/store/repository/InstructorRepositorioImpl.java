@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import pe.store.model.Instructor;
 
 @Repository // gestioname en tu contexto de IoC--Spring
-public class InstructorRepositorioImpl  {
+public class InstructorRepositorioImpl{
 
 	// Atributo sea nivel de clase, que todos los objetos de esa clase van a
 	// referenciar a la misma informacion guardada en memoria.
@@ -29,13 +29,11 @@ public class InstructorRepositorioImpl  {
 
 	//@Override
 	public void insert(Instructor instructor) {
-		// TODO Auto-generated method stub
 		itemsInstructor.add(instructor);
 	}
 
 	//@Override
 	public void update(Instructor instructor) {
-		// TODO Auto-generated method stub
 		// ubico el actual
 		Instructor oldInstructor = findById(instructor.getInstructorId());
 		// borrar el actual de la lista
@@ -46,7 +44,6 @@ public class InstructorRepositorioImpl  {
 
 	//@Override
 	public void delete(Integer instructorId) {
-		// TODO Auto-generated method stub
 		// ubico el actual
 		Instructor oldInstructor = findById(instructorId);
 		// borrar el actual de la lista
@@ -55,7 +52,6 @@ public class InstructorRepositorioImpl  {
 
 	//@Override
 	public Instructor findById(Integer instructorId) {
-		// TODO Auto-generated method stub
 		Optional<Instructor> instructor = itemsInstructor.stream().filter(p -> p.getInstructorId() == instructorId)
 				.findFirst();
 		return instructor.orElse(null);
@@ -63,7 +59,6 @@ public class InstructorRepositorioImpl  {
 
 	//@Override
 	public Collection<Instructor> findAll() {
-		// TODO Auto-generated method stub
 		return itemsInstructor;
 	}
 
