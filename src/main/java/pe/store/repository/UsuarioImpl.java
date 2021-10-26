@@ -3,8 +3,10 @@ package pe.store.repository;
 import pe.store.model.Usuario;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UsuarioImpl implements UsuarioInterface{
+
     @Override
     public List<Usuario> listarUsuario() {
         return null;
