@@ -22,4 +22,6 @@ public interface InstructorRepository extends CrudRepository<Instructor, Integer
 	public abstract void delete(Integer instructorId);
 	public abstract Instructor findById(Integer instructorId);
 	public abstract Collection<Instructor> findAll();*/
+
+
 }

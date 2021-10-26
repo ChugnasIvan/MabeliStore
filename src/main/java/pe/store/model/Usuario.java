@@ -17,7 +17,7 @@ public class Usuario implements Serializable {
     @Getter @Setter // dependencia lombok -> genera los getters y setters
     private Integer id_usuario;
 
-    //@ManyToOne(mappedBy = "itemsTecnologia",cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne
     private Rol rol;
 
     @Column(name = "nombre_usuario")

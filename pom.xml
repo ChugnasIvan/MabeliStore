@@ -9,7 +9,7 @@
 		<version>2.5.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>pe.company</groupId>
+	<groupId>pe.store</groupId>
 	<artifactId>MabeliStore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MabeliStore</name>
