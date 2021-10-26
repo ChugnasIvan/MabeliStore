@@ -22,7 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import pe.store.model.Instructor;
 import pe.store.service.InstructorService;
-
+//rubi estuvo aqui
 @RestController
 @RequestMapping("/instructor")
 public class InstructorRestController {
