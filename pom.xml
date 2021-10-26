@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pe.company</groupId>
-	<artifactId>DemoRest</artifactId>
+	<artifactId>MabeliStore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>DemoRest</name>
-	<description>Demo project for Spring Boot</description>
+	<name>MabeliStore</name>
+	<description>Empresa Textil</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
