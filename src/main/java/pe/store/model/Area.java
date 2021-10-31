@@ -2,6 +2,8 @@ package pe.store.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Area")
@@ -20,15 +22,15 @@ public class Area implements Serializable {
     @Column(name = "estado_area")
     private String estado;
 
+    //mapeamos un forignKey
+    //@OneToOne(mappedBy = "areaID", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "areaID",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+    private Collection<Cargo> itemsCargo = new ArrayList<>() ;
+
+    //private Cargo cargoID;
+
     public Area(){
         super();
-    }
-
-    public Area(Integer areaId, String nombre, String estado) {
-        super();
-        this.areaId = areaId;
-        this.nombre = nombre;
-        this.estado = estado;
     }
 
     public Area(Integer areaId) {
@@ -36,6 +38,30 @@ public class Area implements Serializable {
         this.areaId = areaId;
     }
 
+    public Area(Integer areaId, String nombre, String estado) {
+        this.areaId = areaId;
+        this.nombre = nombre;
+        this.estado = estado;
+    }
+
+    public Area(String nombre, String estado, Cargo cargoID) {//
+        this.nombre = nombre;
+        this.estado = estado;
+        //this.cargoID = cargoID;
+    }
+
+    public Area(Integer areaId, String nombre, String estado, Collection<Cargo> itemsCargo) {
+        this.areaId = areaId;
+        this.nombre = nombre;
+        this.estado = estado;
+        this.itemsCargo = itemsCargo;
+    }
+
+    public Area(Area area) {
+        this(area.getAreaId(), area.getNombre(), area.getEstado());
+    }
+
+    //GETTER & SETTER
     public Integer getAreaId() {
         return areaId;
     }
@@ -59,4 +85,19 @@ public class Area implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    /*public Cargo getCargoID() {
+        return cargoID;
+    }
+    public void setCargoID(Cargo cargoID) {
+        this.cargoID = cargoID;
+    }*/
+    public Collection<Cargo> getItemsCargo() {
+        return itemsCargo;
+    }
+
+    public void setItemsCargo(Collection<Cargo> itemsCargo) {
+        this.itemsCargo = itemsCargo;
+    }
+
 }

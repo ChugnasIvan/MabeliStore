@@ -2,9 +2,10 @@ package pe.store.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import pe.store.model.Area;
+import pe.store.model.Empleado;
 
 @Repository
-public interface AreaRepository extends CrudRepository<Area, Integer> {
+public interface EmpleadoRepository extends CrudRepository<Empleado, Integer> {
+
 
 }
