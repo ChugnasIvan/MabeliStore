@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pe.store.model.Area;
-import pe.store.model.Cargo;
 import pe.store.service.GenericService;
 
 import java.util.Collection;
