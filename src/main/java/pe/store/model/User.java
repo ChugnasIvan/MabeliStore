@@ -1,4 +1,4 @@
-package pe.store.persistence.entity;
+package pe.store.model;
 
 import javax.persistence.*;
 
