@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MabeliStoreRestApplication {
 
 	public static void main(String[] args) {
-		System.out.println("Arrancando Demo");
+		System.out.println("Arrancando MabeliStore");
 		SpringApplication.run(MabeliStoreRestApplication.class, args);
 		System.out.println("Fin de arranque!!");
 	}
