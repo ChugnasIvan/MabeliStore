@@ -33,6 +33,7 @@
 
 		<!-- Lombok -->
 		<dependency>
+
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.22</version>
@@ -41,6 +42,7 @@
 
 		<!-- Conector mySql -->
 		<dependency>
+
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
@@ -51,6 +53,7 @@
 			<scope>test</scope>
 		</dependency>
 
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -58,8 +61,18 @@
 			<version>2.5.5</version>
 		</dependency>
 
-	</dependencies>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
 
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin>
