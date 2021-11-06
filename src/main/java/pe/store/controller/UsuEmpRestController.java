@@ -14,7 +14,7 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/usuEmp")
 public class UsuEmpRestController {
-
+    // comentario
     @Autowired
     private GenericService<UsuarioEmpleado,Integer> usuEmpService;
 
