@@ -1,22 +1,19 @@
 package pe.store.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@ApiModel(description = "Contiene toda la informacion relativa de las areas de la empresa MabeliStore")
 @Entity
 @Table(name = "Area")
 public class Area implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "id_area")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(notes="Identificador unico de Area", required = true)
     private Integer areaId;
 
     @Column(name = "nombre_area")
