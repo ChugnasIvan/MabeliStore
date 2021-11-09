@@ -22,14 +22,14 @@ public class AreaRestController {
     private GenericService<Area,Integer> areaService;
 
     @GetMapping("/listar")
-    @ApiOperation(value = "Devuelve la lista de todas la areas", httpMethod = "GET", nickname = "listarAreas")
+    @ApiOperation(value = "Devuelve la lista de todas la areas", httpMethod = "GET", nickname = "listaAreas")
     public ResponseEntity<?> listar()
     {
         Collection<Area> itemsArea = areaService.findAll();
         return new ResponseEntity<>(itemsArea, HttpStatus.OK);
     }
     @GetMapping("/buscar/{id}")
-    @ApiOperation(value = "Devuelve la lista de las areas por ID", httpMethod = "GET", nickname = "listarAreasPorID")
+    @ApiOperation(value = "Devuelve la lista de las areas por ID", httpMethod = "GET", nickname = "listaAreaByID")
     public ResponseEntity<?> buscar(@ApiParam(value = "Identificador del area", required = true) @PathVariable(name = "id") Integer areaId)
     {
         Area area = (Area) areaService.findById(areaId);
@@ -46,7 +46,7 @@ public class AreaRestController {
         return new ResponseEntity<>(respuesta,HttpStatus.CREATED);
     }
     @DeleteMapping("/borrar/{id}")
-    @ApiOperation(value = "Elimina una area por ID", httpMethod = "Delete", nickname = "EliminaArea")
+    @ApiOperation(value = "Elimina una area por ID", httpMethod = "DELETE", nickname = "EliminaArea")
     public ResponseEntity<?> borrar(@ApiParam(value = "Identificador del area", required = true) @PathVariable(name = "id")  Integer areaID)
     {
         Area area = areaService.findById(areaID);

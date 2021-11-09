@@ -1,5 +1,7 @@
 package pe.store.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ public class TipoDocRestController {
     private GenericService<TipoDocumento,Integer> tdocService;
 
     @GetMapping("/listar")
+    @ApiOperation(value = "Devuelve la lista de los Tipo de Documentos", httpMethod = "GET", nickname = "listaTipoDocumento")
     public ResponseEntity<?> listar()
     {
         Collection<TipoDocumento> itemsTdoc = tdocService.findAll();
@@ -26,7 +29,8 @@ public class TipoDocRestController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<?> buscar(@PathVariable(name = "id") Integer tdocId)
+    @ApiOperation(value = "Devuelve la lista de las Tipo de Documentos por ID", httpMethod = "GET", nickname = "listaTipoDocumentoByID")
+    public ResponseEntity<?> buscar(@ApiParam(value = "Identificador del Tipo de Documento", required = true) @PathVariable(name = "id") Integer tdocId)
     {
         TipoDocumento tdoc = (TipoDocumento) tdocService.findById(tdocId);
         if (tdoc == null)
@@ -35,6 +39,7 @@ public class TipoDocRestController {
     }
 
     @PostMapping("/agregar")
+    @ApiOperation(value = "Registra un Tipo de Documento", httpMethod = "POST", nickname = "RegistraTipoDocumento")
     public ResponseEntity<?> agregar(@RequestBody TipoDocumento tdoc)
     {
         tdocService.insert(tdoc);
@@ -43,7 +48,8 @@ public class TipoDocRestController {
     }
 
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrar(@PathVariable(name = "id") Integer tdocID)
+    @ApiOperation(value = "Elimina un Tipo de Documento por ID", httpMethod = "DELETE", nickname = "EliminaTipoDocumento")
+    public ResponseEntity<?> borrar(@ApiParam(value = "Identificador del Tipo de Documento", required = true) @PathVariable(name = "id") Integer tdocID)
     {
         TipoDocumento tdoc = tdocService.findById(tdocID);
         if (tdoc == null)
@@ -55,7 +61,8 @@ public class TipoDocRestController {
 
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable(name = "id") Integer distritoID,@RequestBody TipoDocumento newTdoc)
+    @ApiOperation(value = "Actualiza un Tipo de Documento por ID", httpMethod = "PUT", nickname = "ActualizaTipoDocumento")
+    public ResponseEntity<?> actualizar(@ApiParam(value = "Identificador del Tipo de Documento", required = true) @PathVariable(name = "id") Integer distritoID, @RequestBody TipoDocumento newTdoc)
     {
         TipoDocumento tdoc = tdocService.findById(distritoID);
         if (tdoc == null)
@@ -63,7 +70,7 @@ public class TipoDocRestController {
         //actualizacion total!!!
         tdocService.update(newTdoc);
         String respuesta = "Tipo Documento  "+ tdoc.getId_tipoDoc()+" - " +tdoc.getDescripcion() +" eliminado correctamente";
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
     }
 
 }

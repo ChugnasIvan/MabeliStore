@@ -1,5 +1,7 @@
 package pe.store.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -19,18 +21,18 @@ public class Area implements Serializable {
     @ApiModelProperty(notes="Identificador unico de Area", required = true)
     private Integer areaId;
 
-    @Column(name = "nombre_area")
+    @Column(name = "nombre_area", nullable = false, length = 100)
     private String nombre;
 
-    @Column(name = "estado_area")
+    @Column(name = "estado_area", nullable = false, length = 1)
     private String estado;
 
     //mapeamos un forignKey
     //@OneToOne(mappedBy = "areaID", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @OneToMany(mappedBy = "area",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+    @JsonManagedReference(value = "itemsCargo_Area")
+    @JsonIgnore
+    @OneToMany(mappedBy = "areaID",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
     private Collection<Cargo> itemsCargo = new ArrayList<>() ;
-
-    //private Cargo cargoID;
 
     public Area(){
         super();
@@ -89,12 +91,6 @@ public class Area implements Serializable {
         this.estado = estado;
     }
 
-    /*public Cargo getCargoID() {
-        return cargoID;
-    }
-    public void setCargoID(Cargo cargoID) {
-        this.cargoID = cargoID;
-    }*/
     public Collection<Cargo> getItemsCargo() {
         return itemsCargo;
     }
