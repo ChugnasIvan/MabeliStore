@@ -1,10 +1,16 @@
 package pe.store.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@ApiModel(description = "Contiene la informacion relativa de los Tipos de Documentos")
 @Entity
 @Table(name = "Tipodocumento")
 public class TipoDocumento  implements Serializable {
@@ -12,14 +18,17 @@ public class TipoDocumento  implements Serializable {
     @Id
     @Column(name = "id_tipodoc")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes="Identificador unico de Tipo Documento", required = true)
     private Integer id_tipoDoc;
 
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", nullable = false, length = 100)
     private String descripcion;
 
-    @Column(name = "estado")
+    @Column(name = "estado", nullable = false, length = 1)
     private String estado;
 
+    @JsonManagedReference(value = "itemsEmpleado_TipoDoc")
+    @JsonIgnore
     @OneToMany(mappedBy = "tipoDocumento",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
     private Collection<Empleado> itemsEmpleado = new ArrayList<>() ;
 

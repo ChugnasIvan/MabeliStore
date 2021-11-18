@@ -1,9 +1,16 @@
 package pe.store.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@ApiModel(description = "Contiene toda la informacion relativa de empleados de la empresa MabeliStore")
 @Entity
 @Table(name = "Empleado")
 public class Empleado implements Serializable {
@@ -13,50 +20,58 @@ public class Empleado implements Serializable {
     @Id
     @Column(name = "id_emp")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes="Identificador unico de Empleado", required = true)
     private Integer empId;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
-    @Column(name = "ape_paterno")
+    @Column(name = "ape_paterno", nullable = false, length = 100)
     private String apePaterno;
 
-    @Column(name = "ape_materno")
+    @Column(name = "ape_materno", nullable = false, length = 100)
     private String apeMaterno;
 
+    @JsonBackReference(value = "tipoDocumento")
     @ManyToOne
     @JoinColumn(name = "id_tipodoc",nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_tipodoc) references Tipodocumento(id_tipodoc)"))
     private TipoDocumento tipoDocumento;
 
-    @Column(name = "num_documento")
+    @Column(name = "num_documento", nullable = false, length = 11)
     private String numDocumento;
 
     @Column(name = "fecha_nac")
     private Date fechaNac;
 
-    @Column(name = "edad")
+    @Column(name = "edad", nullable = false, length = 2)
     private String edad;
 
-    @Column(name = "sexo")
+    @Column(name = "sexo", nullable = false, length = 10)
     private String sexo;
 
-    @Column(name = "direccion")
+    @Column(name = "direccion", nullable = false, length = 100)
     private String direccion;
 
-    @Column(name = "estado")
+    @Column(name = "estado", nullable = false, length = 1)
     private String estado;
 
+    //
+    //@JsonManagedReference
+    //@JsonIgnore
+    @JsonBackReference(value = "usuario")
     @OneToOne
     @JoinColumn(name = "id_usu_emp",nullable = false, unique = true,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_usu_emp) references usuario_empleado(id_usu_emp)"))
     private UsuarioEmpleado usuario;
 
+    @JsonBackReference(value = "cargo")
     @ManyToOne
     @JoinColumn(name = "id_cargo",nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_cargo) references cargo(id_cargo)"))
     private Cargo cargo;
 
+    @JsonBackReference(value = "distrito")
     @ManyToOne
     @JoinColumn(name = "id_dis",nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_dis) references distrito(id_dis)"))

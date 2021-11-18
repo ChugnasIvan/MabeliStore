@@ -1,5 +1,8 @@
 package pe.store.controller;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ public class EmpleadoRestController {
     private GenericService<Empleado,Integer> empService;
 
     @GetMapping("/listar")
+    @ApiOperation(value = "Devuelve la lista de todos los empleados", httpMethod = "GET", nickname = "listaEmpleado")
     public ResponseEntity<?> listar()
     {
         Collection<Empleado> itemsEmp = empService.findAll();
@@ -25,15 +29,17 @@ public class EmpleadoRestController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<?> buscar(@PathVariable(name = "id") Integer empId)
+    @ApiOperation(value = "Devuelve la lista de lOS Empleados por ID", httpMethod = "GET", nickname = "listaEmpleadoByID")
+    public ResponseEntity<?> buscar(@ApiParam(value = "Identificador del Empleado", required = true) @PathVariable(name = "id") Integer empId)
     {
         Empleado emp = (Empleado) empService.findById(empId);
         if (emp == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Area no encontrado");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Empleado no encontrado");
         return new ResponseEntity<>(emp, HttpStatus.OK);
     }
 
     @PostMapping("/agregar")
+    @ApiOperation(value = "Registra un Empleado", httpMethod = "POST", nickname = "RegistraEmpleado")
     public ResponseEntity<?> agregar(@RequestBody Empleado emp)
     {
         empService.insert(emp);
@@ -42,7 +48,8 @@ public class EmpleadoRestController {
     }
 
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrar(@PathVariable(name = "id")  Integer empID)
+    @ApiOperation(value = "Elimina un Empleado por ID", httpMethod = "DELETE", nickname = "EliminaEmpleado")
+    public ResponseEntity<?> borrar(@ApiParam(value = "Identificador del Empleado", required = true) @PathVariable(name = "id")  Integer empID)
     {
         Empleado emp = empService.findById(empID);
         if (emp == null)
@@ -54,7 +61,8 @@ public class EmpleadoRestController {
 
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable(name = "id")  Integer empID,@RequestBody Empleado updemp)
+    @ApiOperation(value = "Actualiza un Empleado por ID", httpMethod = "PUT", nickname = "ActualizaEmpleado")
+    public ResponseEntity<?> actualizar(@ApiParam(value = "Identificador del Empleado", required = true) @PathVariable(name = "id")  Integer empID,@RequestBody Empleado updemp)
     {
         Empleado emp = empService.findById(empID);
         if (emp == null)

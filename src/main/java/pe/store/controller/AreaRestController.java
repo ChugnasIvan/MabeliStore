@@ -1,5 +1,7 @@
 package pe.store.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -20,31 +22,32 @@ public class AreaRestController {
     private GenericService<Area,Integer> areaService;
 
     @GetMapping("/listar")
+    @ApiOperation(value = "Devuelve la lista de todas la areas", httpMethod = "GET", nickname = "listaAreas")
     public ResponseEntity<?> listar()
     {
         Collection<Area> itemsArea = areaService.findAll();
         return new ResponseEntity<>(itemsArea, HttpStatus.OK);
     }
-
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<?> buscar(@PathVariable(name = "id") Integer areaId)
+    @ApiOperation(value = "Devuelve la lista de las areas por ID", httpMethod = "GET", nickname = "listaAreaByID")
+    public ResponseEntity<?> buscar(@ApiParam(value = "Identificador del area", required = true) @PathVariable(name = "id") Integer areaId)
     {
         Area area = (Area) areaService.findById(areaId);
         if (area == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Area no encontrado");
         return new ResponseEntity<>(area, HttpStatus.OK);
     }
-
     @PostMapping("/agregar")
+    @ApiOperation(value = "Registra una area", httpMethod = "POST", nickname = "RegistraArea")
     public ResponseEntity<?> agregar(@RequestBody Area area)
     {
         areaService.insert(area);
         String respuesta = "Area "+ area.getAreaId()+" - " +area.getNombre() +" creado correctamente";
         return new ResponseEntity<>(respuesta,HttpStatus.CREATED);
     }
-
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrar(@PathVariable(name = "id")  Integer areaID)
+    @ApiOperation(value = "Elimina una area por ID", httpMethod = "DELETE", nickname = "EliminaArea")
+    public ResponseEntity<?> borrar(@ApiParam(value = "Identificador del area", required = true) @PathVariable(name = "id")  Integer areaID)
     {
         Area area = areaService.findById(areaID);
         if (area == null)
@@ -54,9 +57,9 @@ public class AreaRestController {
         return new ResponseEntity<>(respuesta,HttpStatus.ACCEPTED);
     }
 
-
     @PutMapping("/editar/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable(name = "id")  Integer areaID,@RequestBody Area newArea)
+    @ApiOperation(value = "Actualiza una area por ID", httpMethod = "PUT", nickname = "ActualizaArea")
+    public ResponseEntity<?> actualizar(@ApiParam(value = "Identificador del area", required = true) @PathVariable(name = "id")  Integer areaID,@RequestBody Area newArea)
     {
         Area area = areaService.findById(areaID);
         if (area == null)
@@ -66,5 +69,6 @@ public class AreaRestController {
         String respuesta = "Area "+ area.getAreaId()+" - " +area.getNombre() +" actuaizado correctamente";
         return new ResponseEntity<>(respuesta,HttpStatus.ACCEPTED);
     }
+
 
 }

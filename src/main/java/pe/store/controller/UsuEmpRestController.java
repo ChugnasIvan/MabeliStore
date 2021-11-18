@@ -1,5 +1,7 @@
 package pe.store.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ public class UsuEmpRestController {
     private GenericService<UsuarioEmpleado,Integer> usuEmpService;
 
     @GetMapping("/listar")
+    @ApiOperation(value = "Devuelve la lista de todos los usuarios", httpMethod = "GET", nickname = "listaUsuarios")
     public ResponseEntity<?> listar()
     {
         Collection<UsuarioEmpleado> itemsUsuEmp = usuEmpService.findAll();
@@ -26,7 +29,8 @@ public class UsuEmpRestController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<?> buscar(@PathVariable(name = "id") Integer usuId)
+    @ApiOperation(value = "Devuelve la lista de los usuarios por ID", httpMethod = "GET", nickname = "listaUsuarioByID")
+    public ResponseEntity<?> buscar(@ApiParam(value = "Identificador del usuario", required = true) @PathVariable(name = "id") Integer usuId)
     {
         UsuarioEmpleado usuEmp = (UsuarioEmpleado) usuEmpService.findById(usuId);
         if (usuEmp == null)
@@ -35,6 +39,7 @@ public class UsuEmpRestController {
     }
 
     @PostMapping("/agregar")
+    @ApiOperation(value = "Registra un usuario", httpMethod = "POST", nickname = "RegistraUsuario")
     public ResponseEntity<?> agregar(@RequestBody UsuarioEmpleado usuEmp)
     {
         usuEmpService.insert(usuEmp);
@@ -43,7 +48,8 @@ public class UsuEmpRestController {
     }
 
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrar(@PathVariable(name = "id")  Integer usuEmpId)
+    @ApiOperation(value = "Elimina un usuario por ID", httpMethod = "DELETE", nickname = "EliminaUsuario")
+    public ResponseEntity<?> borrar(@ApiParam(value = "Identificador del usuario", required = true) @PathVariable(name = "id")  Integer usuEmpId)
     {
         UsuarioEmpleado usuEmp = usuEmpService.findById(usuEmpId);
         if (usuEmp == null)
@@ -55,7 +61,8 @@ public class UsuEmpRestController {
 
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable(name = "id")  Integer usuEmpID,@RequestBody UsuarioEmpleado updUsuEmp)
+    @ApiOperation(value = "Actualiza un usuario por ID", httpMethod = "PUT", nickname = "ActualizaUsuario")
+    public ResponseEntity<?> actualizar(@ApiParam(value = "Identificador del usuario", required = true) @PathVariable(name = "id")  Integer usuEmpID, @RequestBody UsuarioEmpleado updUsuEmp)
     {
         UsuarioEmpleado usuEmp = usuEmpService.findById(usuEmpID);
         if (usuEmp == null)

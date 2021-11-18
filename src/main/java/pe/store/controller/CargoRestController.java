@@ -1,5 +1,7 @@
 package pe.store.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ public class CargoRestController {
     private GenericService<Cargo,Integer> cargoService;
 
     @GetMapping("/listar")
+    @ApiOperation(value = "Devuelve la lista de todas la cargos", httpMethod = "GET", nickname = "listaCargos")
     public ResponseEntity<?> listar()
     {
         Collection<Cargo> itemsCargo = cargoService.findAll();
@@ -28,7 +31,8 @@ public class CargoRestController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<?> buscar(@PathVariable(name = "id") Integer cargoId)
+    @ApiOperation(value = "Devuelve la lista de las cargos por ID", httpMethod = "GET", nickname = "listaCargoByID")
+    public ResponseEntity<?> buscar(@ApiParam(value = "Identificador del cargo", required = true) @PathVariable(name = "id") Integer cargoId)
     {
         Cargo cargo = (Cargo) cargoService.findById(cargoId);
         if (cargo == null)
@@ -37,6 +41,7 @@ public class CargoRestController {
     }
 
     @PostMapping("/agregar")
+    @ApiOperation(value = "Registra un cargo", httpMethod = "POST", nickname = "RegistraCargo")
     public ResponseEntity<?> agregar(@RequestBody Cargo cargo)
     {
         cargoService.insert(cargo);
@@ -45,7 +50,8 @@ public class CargoRestController {
     }
 
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrar(@PathVariable(name = "id")  Integer cargoID)
+    @ApiOperation(value = "Elimina un cargo por ID", httpMethod = "DELETE", nickname = "EliminaCargo")
+    public ResponseEntity<?> borrar(@ApiParam(value = "Identificador del cargo", required = true) @PathVariable(name = "id")  Integer cargoID)
     {
         Cargo cargo = cargoService.findById(cargoID);
         if (cargo == null)
@@ -57,7 +63,8 @@ public class CargoRestController {
 
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable(name = "id")  Integer cargoID,@RequestBody Cargo updcargo)
+    @ApiOperation(value = "Actualiza un cargo por ID", httpMethod = "PUT", nickname = "ActualizaCargo")
+    public ResponseEntity<?> actualizar(@ApiParam(value = "Identificador del cargo", required = true) @PathVariable(name = "id")  Integer cargoID, @RequestBody Cargo updcargo)
     {
         Cargo cargo = cargoService.findById(cargoID);
         if (cargo == null)

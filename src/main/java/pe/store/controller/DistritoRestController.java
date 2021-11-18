@@ -1,5 +1,7 @@
 package pe.store.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ public class DistritoRestController {
     private GenericService<Distrito,Integer> distritoService;
 
     @GetMapping("/listar")
+    @ApiOperation(value = "Devuelve la lista de todos los distritoS", httpMethod = "GET", nickname = "listaDistritos")
     public ResponseEntity<?> listar()
     {
         Collection<Distrito> itemsDistrito = distritoService.findAll();
@@ -29,7 +32,8 @@ public class DistritoRestController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<?> buscar(@PathVariable(name = "id") Integer disId)
+    @ApiOperation(value = "Devuelve el distrito por ID", httpMethod = "GET", nickname = "listaDistritoByID")
+    public ResponseEntity<?> buscar(@ApiParam(value = "Identificador del distrito", required = true) @PathVariable(name = "id") Integer disId)
     {
         Distrito distrito = (Distrito) distritoService.findById(disId);
         if (distrito == null)
@@ -38,14 +42,17 @@ public class DistritoRestController {
     }
 
     @PostMapping("/agregar")
+    @ApiOperation(value = "Registra un distrito", httpMethod = "POST", nickname = "RegistraDistrito")
     public ResponseEntity<?> agregar(@RequestBody Distrito distrito)
     {
         distritoService.insert(distrito);
         String respuesta = "Distrito "+ distrito.getIdDis()+" - " +distrito.getDescripcion() +" creado correctamente";
         return new ResponseEntity<>(respuesta,HttpStatus.CREATED);
     }
+
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrar(@PathVariable(name = "id") Integer distritoID)
+    @ApiOperation(value = "Elimina distrito por ID", httpMethod = "DELETE", nickname = "EliminaDistrito")
+    public ResponseEntity<?> borrar(@ApiParam(value = "Identificador del distrito", required = true) @PathVariable(name = "id") Integer distritoID)
     {
         Distrito distrito = distritoService.findById(distritoID);
         if (distrito == null)
@@ -57,14 +64,16 @@ public class DistritoRestController {
 
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable(name = "id") Integer distritoID,@RequestBody Distrito newDis)
+    @ApiOperation(value = "Actualiza un distrito por ID", httpMethod = "PUT", nickname = "ActualizaDistrito")
+    public ResponseEntity<?> actualizar(@ApiParam(value = "Identificador del distrito", required = true) @PathVariable(name = "id") Integer distritoID, @RequestBody Distrito newDis)
     {
         Distrito distrito = distritoService.findById(distritoID);
         if (distrito == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Distrito no encontrado");
         //actualizacion total!!!
         distritoService.update(newDis);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        String respuesta = "Distrito "+ distrito.getIdDis()+" - " +distrito.getDescripcion() +" actuaizado correctamente";
+        return new ResponseEntity<>(respuesta, HttpStatus.ACCEPTED);
     }
 
 }
