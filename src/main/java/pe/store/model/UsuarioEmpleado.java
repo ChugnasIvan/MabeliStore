@@ -34,6 +34,7 @@ public class UsuarioEmpleado implements Serializable {
     //@JsonManagedReference
     //
     //@JsonIgnore
+    // @chugnasIvan [@JsonBackReference] manejo de recursividad infinita en enlaces bidireccional, sean serializados o no :D
     @JsonBackReference(value = "empleado")
     @OneToOne(mappedBy = "usuario") //Atributo opcional que sirve para indicar el nombre de la propiedad relacionada en la clase
     private Empleado empleado;
