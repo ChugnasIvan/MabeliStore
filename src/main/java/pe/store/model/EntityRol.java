@@ -14,7 +14,7 @@ public class EntityRol implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idRol;
 
-    @Column(name = "nombre_rol")
+    @Column(name = "nombre_rol", nullable = false, length = 50)
     private String nombreRol;
 
     // Tipo de relacion Unidirecional de Usuario Cliente a ESTADO

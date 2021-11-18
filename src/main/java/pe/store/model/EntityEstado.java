@@ -13,7 +13,7 @@ public class EntityEstado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEstado;
 
-    @Column(name = "nombre_estado")
+    @Column(name = "nombre_estado", nullable = false, length = 24)
     private String nombreEstado;
 
     public Integer getIdEstado() {
