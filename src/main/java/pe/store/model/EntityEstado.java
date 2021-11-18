@@ -6,6 +6,8 @@ import javax.persistence.*;
 @Entity
 public class EntityEstado {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "id_estado")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
