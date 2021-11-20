@@ -25,6 +25,9 @@ public class EntityUsuarioCliente implements Serializable {
     @JoinColumn(name = "id_estado_in_cli")
     private EntityEstado estado;
 
+
+
+
     // contructor sobrecargado
     public EntityUsuarioCliente() {
     }

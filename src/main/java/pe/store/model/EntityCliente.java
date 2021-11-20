@@ -44,6 +44,9 @@ public class EntityCliente implements Serializable{
     @Column(name = "num_cel_cli", nullable = false, length = 9)
     private Integer numCelCli;
 
+    @Column(name = "email_cli", nullable = false, length = 9)
+    private Integer emailCli;
+
 
 
 }
