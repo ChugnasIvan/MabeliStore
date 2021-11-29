@@ -36,13 +36,13 @@ public class Producto implements Serializable {
     @Column(name = "estado_prod", nullable = false, length = 1)
     private String estado;
 
-    //@JsonBackReference
+    @JsonBackReference(value = "modelo")
     @ManyToOne
     @JoinColumn(name = "id_modelo",nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_modelo) references modelo(id_modelo)"))
     private Modelo modelo;
 
-    //@JsonBackReference
+    @JsonBackReference(value = "categoria")
     @ManyToOne
     @JoinColumn(name = "id_cate",nullable = false,
             foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_cate) references categoria(id_cate)"))

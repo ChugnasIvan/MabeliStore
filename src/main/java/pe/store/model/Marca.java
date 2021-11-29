@@ -1,5 +1,6 @@
 package pe.store.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -27,7 +28,8 @@ public class Marca implements Serializable {
     @Column(name = "estado_marca", nullable = false, length = 1)
     private String estado;
 
-    //@JsonManagedReference
+    @JsonManagedReference(value = "itemsModelo_Marca")
+    @JsonIgnore
     @OneToMany(mappedBy = "marcaID",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
     private Collection<Modelo> itemsModelo = new ArrayList<>() ;
 

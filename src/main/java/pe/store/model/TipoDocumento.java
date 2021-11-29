@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,7 +34,16 @@ public class TipoDocumento  implements Serializable {
     @JsonManagedReference(value = "itemsEmpleado_TipoDoc")
     @JsonIgnore
     @OneToMany(mappedBy = "tipoDocumento",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+    //@LazyCollection(LazyCollectionOption.FALSE)
+    @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Empleado> itemsEmpleado = new ArrayList<>() ;
+
+    @JsonManagedReference(value = "itemsCliente_TipoDoc")
+    @JsonIgnore
+    @OneToMany(mappedBy = "tipoDocumento",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private Collection<Cliente> itemsCliente = new ArrayList<>() ;
+
 
     //
     public Integer getId_tipoDoc() {
@@ -80,5 +93,13 @@ public class TipoDocumento  implements Serializable {
 
     public void setItemsEmpleado(Collection<Empleado> itemsEmpleado) {
         this.itemsEmpleado = itemsEmpleado;
+    }
+
+    public Collection<Cliente> getItemsCliente() {
+        return itemsCliente;
+    }
+
+    public void setItemsCliente(Collection<Cliente> itemsCliente) {
+        this.itemsCliente = itemsCliente;
     }
 }

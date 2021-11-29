@@ -21,6 +21,30 @@ public class AreaRestController {
     @Autowired
     private GenericService<Area,Integer> areaService;
 
+    @GetMapping("/listar_public")
+    @ApiOperation(value = "Devuelve la lista de todas la areas", httpMethod = "GET", nickname = "listaAreas")
+    public ResponseEntity<?> listarPublic()
+    {
+        Collection<Area> itemsArea = areaService.findAll();
+        return new ResponseEntity<>(itemsArea, HttpStatus.OK);
+    }
+
+    @GetMapping("/listar_admin")
+    @ApiOperation(value = "Devuelve la lista de todas la areas", httpMethod = "GET", nickname = "listaAreas")
+    public ResponseEntity<?> listarAdmin()
+    {
+        Collection<Area> itemsArea = areaService.findAll();
+        return new ResponseEntity<>(itemsArea, HttpStatus.OK);
+    }
+
+    @GetMapping("/listar_user")
+    @ApiOperation(value = "Devuelve la lista de todas la areas", httpMethod = "GET", nickname = "listaAreas")
+    public ResponseEntity<?> listarUser()
+    {
+        Collection<Area> itemsArea = areaService.findAll();
+        return new ResponseEntity<>(itemsArea, HttpStatus.OK);
+    }
+
     @GetMapping("/listar")
     @ApiOperation(value = "Devuelve la lista de todas la areas", httpMethod = "GET", nickname = "listaAreas")
     public ResponseEntity<?> listar()

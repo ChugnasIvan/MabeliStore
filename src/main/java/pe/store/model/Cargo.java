@@ -22,7 +22,7 @@ public class Cargo implements Serializable {
     @Column(name = "id_cargo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(notes="Identificador unico de Cargo", required = true)
-     private Integer cargoId;
+    private Integer cargoId;
 
     @Column(name = "nombre_cargo", nullable = false, length = 100)
     private String nombre;
